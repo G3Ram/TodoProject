@@ -6,7 +6,8 @@ from .models import Todo
 
 
 def list_todo_items(request):
-    return render(request, "todos/todo_list.html")
+    context = {"todo_list": Todo.objects.all()}
+    return render(request, "todos/todo_list.html", context)
 
 
 def insert_todo_item(request: HttpRequest):

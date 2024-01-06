@@ -28,31 +28,49 @@
               </h1>
             </div>
             <div class="card-body">
-              <form
-                action="{% url 'insert_todo_item' %}"
-                autocomplete="off"
-                method="post"
-              >
-                {% csrf_token %}
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="content"
-                    placeholder="Enter your Todo Item"
-                    aria-label="ToDo content"
-                    aria-describedby="basic-addon2"
-                  />
-                  <span
-                    class="input-group-text bg-white py-0"
-                    id="basic-addon2"
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <form
+                    action="{% url 'insert_todo_item' %}"
+                    autocomplete="off"
+                    method="post"
                   >
-                    <button type="submit" class="btn btn-sm text-info">
-                      <i class="fa fa-plus-circle fa-lg"></i>
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="content"
+                        placeholder="Enter your Todo Item"
+                        aria-label="ToDo content"
+                        aria-describedby="basic-addon2"
+                      />
+                      <span
+                        class="input-group-text bg-white py-0"
+                        id="basic-addon2"
+                      >
+                        <button type="submit" class="btn btn-sm text-info">
+                          <i class="fa fa-plus-circle fa-lg"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </form>
+                </li>
+                {% for todo in todo_list%}
+                <li class="list-group-item d-flex justify-content-between">
+                  {{todo.content}}
+
+                  <form action="" method="post">
+                    {% csrf_token%}
+                    <button class="btn">
+                      <i class="far fa-trash-alt fa-lg text-danger"></i>
                     </button>
-                  </span>
-                </div>
-              </form>
+                  </form>
+                </li>
+                {% empty %}
+                <span class="font-italic">You do not have any todos</span>
+                {% endfor %}
+              </ul>
             </div>
           </div>
         </div>
