@@ -60,7 +60,10 @@
                 <li class="list-group-item d-flex justify-content-between">
                   {{todo.content}}
 
-                  <form action="" method="post">
+                  <form
+                    action="{% url 'delete_todo_item' todo.id %}"
+                    method="post"
+                  >
                     {% csrf_token%}
                     <button class="btn">
                       <i class="far fa-trash-alt fa-lg text-danger"></i>
